@@ -1,0 +1,10 @@
+# Create .gitignore file with:
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+.env
+*.ipynb_checkpoints/
+venv/
+.pytest_cache/
+*.log
