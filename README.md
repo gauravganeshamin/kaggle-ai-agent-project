@@ -33,6 +33,4 @@ python src/orchestrator.py
 ✅ Observability logging
 
 ## Submission
-- Kaggle Writeup: [link]
-- Public Repo: [this repo]
-- Video Demo: [link]
+- Public Repo: https://github.com/gauravganeshamin/kaggle-ai-agent-project
