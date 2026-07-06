@@ -1,0 +1,55 @@
+{
+  "deals": [
+    {
+      "id": "DEAL-001",
+      "company": "TechCorp Inc",
+      "amount": 150000,
+      "stage": "Negotiation",
+      "probability": 0.75,
+      "days_in_stage": 32,
+      "owner": "John Smith",
+      "next_step": "Legal review",
+      "expected_close": "2026-08-15",
+      "budget_available": 200000,
+      "industry": "Technology",
+      "contacts": ["john.doe@techcorp.com", "jane.smith@techcorp.com"],
+      "notes": "Waiting on legal approval, very engaged stakeholders"
+    },
+    {
+      "id": "DEAL-002",
+      "company": "CloudStart LLC",
+      "amount": 75000,
+      "stage": "Proposal",
+      "probability": 0.60,
+      "days_in_stage": 14,
+      "owner": "Sarah Johnson",
+      "next_step": "Pricing discussion",
+      "expected_close": "2026-07-30",
+      "budget_available": 100000,
+      "industry": "SaaS",
+      "contacts": ["sales@cloudstart.com"],
+      "notes": "Strong product interest, pricing sensitivity"
+    },
+    {
+      "id": "DEAL-003",
+      "company": "Enterprise Solutions Corp",
+      "amount": 500000,
+      "stage": "Qualification",
+      "probability": 0.45,
+      "days_in_stage": 60,
+      "owner": "Mike Chen",
+      "next_step": "Demo scheduling",
+      "expected_close": "2026-10-31",
+      "budget_available": 600000,
+      "industry": "Enterprise",
+      "contacts": ["cto@enterprisesolutions.com"],
+      "notes": "Large deal, complex approval process, multiple stakeholders"
+    }
+  ],
+  "metadata": {
+    "generated": "2026-07-06",
+    "total_pipeline_value": 725000,
+    "weighted_forecast": 543750,
+    "data_source": "mock_salesforce"
+  }
+}

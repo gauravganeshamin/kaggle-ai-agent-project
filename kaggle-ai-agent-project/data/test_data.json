@@ -1,0 +1,144 @@
+{
+  "test_deals": [
+    {
+      "id": "DEAL-TEST-001",
+      "company": "TestCorp Inc",
+      "amount": 100000,
+      "stage": "Negotiation",
+      "probability": 0.75,
+      "days_in_stage": 30,
+      "owner": "Test Owner",
+      "next_step": "Review",
+      "expected_close": "2026-08-15",
+      "budget_available": 150000
+    },
+    {
+      "id": "DEAL-TEST-002",
+      "company": "DemoCompany LLC",
+      "amount": 50000,
+      "stage": "Proposal",
+      "probability": 0.50,
+      "days_in_stage": 15,
+      "owner": "Test Sales",
+      "next_step": "Demo",
+      "expected_close": "2026-07-30",
+      "budget_available": 60000
+    }
+  ],
+  "test_agent_inputs": {
+    "valid_deal_id": "DEAL-TEST-001",
+    "invalid_deal_id": "DEAL-INVALID-999",
+    "user_queries": [
+      "What's the status on DEAL-TEST-001?",
+      "How's DEAL-TEST-002 progressing?",
+      "Should I follow up on DEAL-001?"
+    ]
+  },
+  "test_tool_outputs": {
+    "sample_draft": {
+      "deal_id": "DEAL-TEST-001",
+      "draft": "Follow-up action for TestCorp Inc",
+      "quality_score": 0.85,
+      "tone": "professional",
+      "revision_count": 0
+    },
+    "sample_risk_assessment": {
+      "deal_id": "DEAL-TEST-001",
+      "risk_level": "MEDIUM",
+      "risk_score": 0.55,
+      "confidence": 0.90,
+      "factors": {
+        "low_probability": false,
+        "long_cycle": false,
+        "large_amount": true,
+        "early_stage": false
+      }
+    },
+    "sample_budget_check": {
+      "deal_id": "DEAL-TEST-001",
+      "deal_amount": 100000,
+      "available_budget": 150000,
+      "fits_budget": true,
+      "utilization_percent": 66.7,
+      "remaining_after": 50000
+    },
+    "sample_timeline_check": {
+      "deal_id": "DEAL-TEST-001",
+      "current_stage": "Negotiation",
+      "expected_close_date": "2026-08-15",
+      "days_until_close": 40,
+      "typical_stage_duration": 45,
+      "is_feasible": true
+    }
+  },
+  "test_evaluation_results": {
+    "deterministic_evaluation": {
+      "evaluation_method": "deterministic",
+      "deal_health_score": 75,
+      "draft_quality_score": 85,
+      "risk_score": 65,
+      "overall_score": 76,
+      "recommendation": "APPROVE",
+      "reasoning": "Deal health: 75/100, Draft quality: 85/100, Risk level: MEDIUM",
+      "confidence": 0.85
+    },
+    "claude_evaluation": {
+      "evaluation_method": "claude_api",
+      "deal_health_score": 78,
+      "draft_quality_score": 88,
+      "risk_score": 70,
+      "overall_score": 79,
+      "recommendation": "APPROVE",
+      "reasoning": "Strong deal fundamentals with good follow-up strategy",
+      "confidence": 0.95
+    }
+  },
+  "test_orchestrator_state": {
+    "current_deal": "DEAL-TEST-001",
+    "attempt_count": 1,
+    "data_quality_checked": true,
+    "draft_quality_checked": true,
+    "max_attempts": 2
+  },
+  "test_conversation_history": [
+    {
+      "timestamp": "2026-07-06T10:30:00.123456",
+      "agent": "DataAgent",
+      "tool": "get_salesforce_deal",
+      "inputs": {
+        "deal_id": "DEAL-TEST-001"
+      },
+      "output": {
+        "id": "DEAL-TEST-001",
+        "company": "TestCorp Inc",
+        "amount": 100000,
+        "stage": "Negotiation"
+      }
+    },
+    {
+      "timestamp": "2026-07-06T10:30:01.234567",
+      "agent": "DrafterAgent",
+      "tool": "generate_draft",
+      "inputs": {
+        "deal_data": {
+          "id": "DEAL-TEST-001",
+          "company": "TestCorp Inc"
+        }
+      },
+      "output": {
+        "deal_id": "DEAL-TEST-001",
+        "draft": "Follow-up action...",
+        "quality_score": 0.85
+      }
+    }
+  ],
+  "expected_results": {
+    "total_agents": 4,
+    "total_tools": 5,
+    "test_timeout_seconds": 5,
+    "expected_execution_time_ms": {
+      "deterministic": 500,
+      "claude_api": 2000
+    }
+  }
+}

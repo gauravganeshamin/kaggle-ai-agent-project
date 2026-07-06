@@ -1,0 +1,94 @@
+# AI Agent System Configuration
+
+orchestrator:
+  # Maximum number of retry attempts for quality gates
+  max_attempts: 2
+  # Enable detailed logging of orchestration steps
+  verbose: true
+  # Timeout for each agent call in seconds
+  timeout: 30
+
+evaluator:
+  # Use Claude API for intelligent scoring (requires ANTHROPIC_API_KEY)
+  use_claude_api: false
+  # Fall back to deterministic scoring if API fails
+  fallback_scoring: true
+  # Maximum retry attempts for evaluation
+  max_retries: 2
+  # Confidence threshold for approvals
+  confidence_threshold: 0.75
+
+agents:
+  data_agent:
+    name: "DataAgent"
+    role: "pulls_salesforce_data"
+    timeout: 10
+  
+  drafter_agent:
+    name: "DrafterAgent"
+    role: "writes_follow_ups"
+    timeout: 10
+  
+  risk_scorer_agent:
+    name: "RiskScorerAgent"
+    role: "scores_deal_health"
+    timeout: 10
+
+# Scoring weights (must sum to 1.0)
+evaluation_weights:
+  deal_health: 0.35
+  draft_quality: 0.25
+  risk_mitigation: 0.25
+  budget_fit: 0.10
+  timeline_fit: 0.05
+
+# Thresholds for recommendations
+recommendations:
+  approve_threshold: 80
+  revise_threshold: 60
+  reject_below: 60
+
+# Logging configuration
+logging:
+  # Log level: DEBUG, INFO, WARNING, ERROR
+  level: "INFO"
+  # Log format: timestamp | level | message
+  format: "%(asctime)s | %(levelname)s | %(message)s"
+  # Log file path (empty = console only)
+  file: ""
+  # Enable request/response logging
+  verbose_api_calls: false
+
+# Mock data configuration
+mock_data:
+  # Use mock Salesforce data (true) or real API (false)
+  use_mock: true
+  # Path to mock data file
+  data_file: "data/sample_deals.json"
+  # Simulate API latency (in seconds)
+  simulated_latency: 0
+
+# API Configuration
+api:
+  # Anthropic API timeout
+  anthropic_timeout: 30
+  # Retry on rate limit
+  retry_on_rate_limit: true
+  # Max retries for API calls
+  max_api_retries: 3
+
+# Feature flags
+features:
+  enable_retry_loop: true
+  enable_observability_logging: true
+  enable_state_management: true
+  enable_multi_agent_coordination: true
+
+# Output configuration
+output:
+  # Format: json, pretty_json, csv
+  format: "pretty_json"
+  # Include observability logs in output
+  include_logs: true
+  # Truncate long outputs
+  max_length: null
